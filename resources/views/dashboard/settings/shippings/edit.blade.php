@@ -51,16 +51,29 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="name">الاسم </label>
-                                                            <input type="text" value="{{$shipping->value}}" id="name"
+                                                            <label for="value">الاسم </label>
+                                                            <input type="text" value="{{$shipping->value}}" id="value"
                                                                    class="form-control"
-                                                                   name="name">
-                                                            @error("name")
+                                                                   name="value">
+                                                            @error("value")
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="plain_value">قيمة التوصيل </label>
+                                                            <input type="number" value="{{$shipping->plain_value}}" id="plain_value"
+                                                                   class="form-control"
+                                                                   name="plain_value">
+                                                            @error("plain_value")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                 </div>
+
+
                                             </div>
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
