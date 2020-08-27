@@ -218,6 +218,81 @@
 
     // Create the chart
     var XRPAreaChart = new Chart(xrpChartjs, XRPCardconfig);
+
+    /********************************************
+     *               Customer Card                    *
+     ********************************************/
+        //Get the context of the Chart canvas element we want to select
+    var customerChartjs = document.getElementById("customer-chartjs").getContext("2d");
+    // Create Linear Gradient
+    var blue_trans_gradient = customerChartjs.createLinearGradient(0, 0, 0, 100);
+    blue_trans_gradient.addColorStop(0, 'rgba(30,159,242,0.4)');
+    blue_trans_gradient.addColorStop(1, 'rgba(255,255,255,0)');
+    // Chart Options
+    var CustomerStats = {
+        responsive: true,
+        maintainAspectRatio: false,
+        datasetStrokeWidth : 3,
+        pointDotStrokeWidth : 4,
+        tooltipFillColor: "rgba(30,159,242,0.8)",
+        legend: {
+            display: false,
+        },
+        hover: {
+            mode: 'label'
+        },
+        scales: {
+            xAxes: [{
+                display: false,
+            }],
+            yAxes: [{
+                display: false,
+                ticks: {
+                    min: 0,
+                    max: 85
+                },
+            }]
+        },
+        title: {
+            display: false,
+            fontColor: "#FFF",
+            fullWidth: false,
+            fontSize: 30,
+            text: '52%'
+        }
+    };
+
+    // Chart Data
+    var CustomerMonthData = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        datasets: [{
+            label: "CUSTOMER",
+            data: [70, 20, 35, 60, 20, 40, 30],
+            backgroundColor: blue_trans_gradient,
+            borderColor: "#1E9FF2",
+            borderWidth: 1.5,
+            strokeColor : "#1E9FF2",
+            pointRadius: 0,
+        }]
+    };
+
+    var CustomerCardconfig = {
+        type: 'line',
+
+        // Chart Options
+        options : CustomerStats,
+
+        // Chart Data
+        data : CustomerMonthData
+    };
+
+    // Create the chart
+    var CustomerAreaChart = new Chart(customerChartjs, CustomerCardconfig);
+
+
+
+
+
 })(window, document, jQuery);
 
 
@@ -261,7 +336,7 @@ $(window).on("load", function(){
                 // Setup grid
                 grid: {
                     x: 40,
-                    x2: 0,                    
+                    x2: 0,
                     borderColor: '#e3e3e3'
                 },
 
@@ -313,11 +388,11 @@ $(window).on("load", function(){
                         boundaryGap : true,
                         axisLine: {
                             lineStyle: {
-                                color: '#fff'                                
+                                color: '#fff'
                             }
                         },
                         axisTick: {onGap:false},
-                        splitLine: {show:false},                        
+                        splitLine: {show:false},
                         data : [
                             "2017/1/24", "2017/1/25", "2017/1/28", "2017/1/29", "2017/1/30",
                             "2017/1/31", "2017/2/1", "2017/2/4", "2017/2/5", "2017/2/6",
@@ -486,7 +561,7 @@ $(window).on("load", function(){
                             [2190.1,2148.35,2126.22,2190.1]
                         ],
                         markPoint : {
-                            symbol: 'star',                            
+                            symbol: 'star',
                             //symbolSize:20,
                             itemStyle:{
                                 normal:{label:{position:'top'}}
