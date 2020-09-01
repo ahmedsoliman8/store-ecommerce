@@ -23,9 +23,11 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
     Route::group(['prefix'=>'settings'],function (){
         Route::get('shipping-methods/{type}','SettingsController@editShippingMethods')->name('edit.shipping.methods');
         Route::put('shipping-methods/{id}','SettingsController@updateShippingMethods')->name('update.shipping.methods');
+    });
 
-
-
+    Route::group(['prefix'=>'profile'],function (){
+        Route::get('edit','ProfileController@editProfile')->name('edit.profile');
+        Route::put('update','ProfileController@updateProfile')->name('update.profile');
     });
 });
 Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'guest:admin'],function (){
