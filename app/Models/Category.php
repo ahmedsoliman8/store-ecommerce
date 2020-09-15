@@ -31,8 +31,22 @@ class Category extends Model
       "is_active"=>"boolean"
     ];
 
+    public  function scopeParent($query){
+        return $query->whereNull('parent_id');
+    }
 
 
+    public  function scopeChild($query){
+        return $query->whereNotNull('parent_id');
+    }
+
+    public  function getActive(){
+        return $this->is_active?'مفعل':'غير مفعل';
+    }
+
+    public  function parents(){
+        return $this->hasMany('App\Models\Category','id','parent_id');
+    }
 
 
 

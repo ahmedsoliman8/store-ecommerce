@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
     <link rel="stylesheet" type="text/css"
           href="{{asset('assets/admin/vendors/css/charts/chartist-plugin-tooltip.css')}}">
+
     <link rel="stylesheet" type="text/css"
           href="{{asset('assets/admin/vendors/css/forms/toggle/bootstrap-switch.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/forms/toggle/switchery.min.css')}}">
@@ -58,9 +59,13 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/style.css')}}">
     @endif
     <!-- END Custom CSS-->
+
+    <link rel="stylesheet" href="{{asset('assets/admin/jstree/themes/default/style.css')}}">
+
     @notify_css
     @yield('style')
     <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -81,14 +86,37 @@
 @notify_js
 @notify_render
 
+
+
+
+
+
+
+{{--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+--}}
+
+
+
+
+
+
+
 <!-- BEGIN VENDOR JS-->
 <script src="{{asset('assets/admin/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{ asset('assets/admin/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
+<script src="{{ asset('assets/admin/jstree/jstree.js') }}"></script>
+<script src="{{ asset('assets/admin/jstree/jstree.wholerow.js') }}"></script>
+<script src="{{ asset('assets/admin/jstree/jstree.checkbox.js') }}"></script>
 <!-- BEGIN VENDOR JS-->
 <script src="{{asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('assets/admin/vendors/js/tables/datatable/dataTables.buttons.min.js')}}"
         type="text/javascript"></script>
-
+<script src="{{asset("assets/admin/bower_components/bootstrap/dist/js/bootstrap.min.js")}}" ></script>
 <script src="{{asset('assets/admin/vendors/js/forms/toggle/bootstrap-switch.min.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('assets/admin/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}"
@@ -125,6 +153,9 @@
 <script src="{{asset('assets/admin/js/scripts/forms/checkbox-radio.js')}}" type="text/javascript"></script>
 
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
+
+
+
 
 <script>
     $('#meridians1').timeDropper({
@@ -175,6 +206,7 @@
         meridians: true,setCurrentTime: false
     });
 </script>
-@yield('script')
+ --}}
+@stack('script')
 </body>
 </html>
