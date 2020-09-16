@@ -52,6 +52,17 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
         Route::get('changeStatus/{id}','BrandController@changeStatus')->name('admin.brands.status');
     });
 
+    //Tags
+    Route::group(['prefix'=>'tags'],function (){
+        Route::get('/','TagController@index')->name('admin.tags');
+        Route::get('create','TagController@create')->name('admin.tags.create');
+        Route::post('store','TagController@store')->name('admin.tags.store');
+        Route::get('edit/{id}','TagController@edit')->name('admin.tags.edit');
+        Route::post('update/{id}','TagController@update')->name('admin.tags.update');
+        Route::get('delete/{id}','TagController@destroy')->name('admin.tags.delete');
+        Route::get('changeStatus/{id}','TagController@changeStatus')->name('admin.tags.status');
+    });
+
     //Sub Categories
     /*
     Route::group(['prefix'=>'sub_categories'],function (){
