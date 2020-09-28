@@ -82,7 +82,8 @@ class MainCategoriesController extends Controller
         foreach ($cat_parent as $sub){
             self::deleteParent($sub->id);
             $subCat=  Category::find($sub->id);
-            if(!empty($subCat)){      $subCat->deleteTranslations();
+            if(!empty($subCat)){
+                $subCat->deleteTranslations();
                 $subCat->delete();           }
         }
         $category= Category::find($id);
