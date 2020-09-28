@@ -36,9 +36,8 @@ class Tag extends Model
         return $this->is_active?'مفعل':'غير مفعل';
     }
 
-
-
-
-
+    public  function scopeActive($query){
+        return $query->where("is_active",1);
+    }
 
 }

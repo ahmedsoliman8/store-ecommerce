@@ -63,6 +63,18 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
         Route::get('changeStatus/{id}','TagController@changeStatus')->name('admin.tags.status');
     });
 
+
+    //Tags
+    Route::group(['prefix'=>'products'],function (){
+        Route::get('/','ProductController@index')->name('admin.products');
+        Route::get('create','ProductController@create')->name('admin.products.create');
+        Route::post('store','ProductController@store')->name('admin.products.store');
+        Route::get('edit/{id}','ProductController@edit')->name('admin.products.edit');
+        Route::post('update/{id}','ProductController@update')->name('admin.products.update');
+        Route::get('delete/{id}','ProductController@destroy')->name('admin.products.delete');
+        Route::get('changeStatus/{id}','ProductController@changeStatus')->name('admin.products.status');
+    });
+
     //Sub Categories
     /*
     Route::group(['prefix'=>'sub_categories'],function (){
