@@ -1,5 +1,18 @@
 @extends('layouts.admin')
 
+@push('script')
+    <script type="text/javascript">
+        $('.datepicker').datepicker({
+            rtl:'{{LaravelLocalization::setLocale()=='ar'?true:false}}',
+            language:'{{LaravelLocalization::setLocale()}}',
+            format:'yyyy-mm-dd',
+            autoclose:false,
+            todayBtn:true,
+            clearBtn:true
+        });
+
+    </script>
+@endpush
 
 @section('content')
     ﻿
@@ -49,12 +62,14 @@
                                             @method('POST')
                                             <hr/>
                                             <ul class="nav nav-tabs">
-                                                <li><a data-toggle="tab" href="#product_info">البيانات الساسية للمنتج<i class="fa fa-list"></i></a></li>
+                                                <li><a data-toggle="tab" href="#product_info">البيانات الاساسية للمنتج<i class="fa fa-list"></i></a></li>
+                                                <li><a data-toggle="tab" href="#product_other_info">البيانات الاخرى للمنتج<i class="fa fa-list"></i></a></li>
                                                 <li><a data-toggle="tab" href="#category_id">الأقسام<i class="fa fa-list"></i></a></li>
 
                                             </ul>
                                             <div class="tab-content">
                                                 @include('dashboard.products.create.tabs.product_info')
+                                                @include('dashboard.products.create.tabs.product_other_info')
                                                 @include('dashboard.products.create.tabs.category_id')
                                             </div>
                                             <hr/>
