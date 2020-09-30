@@ -32,10 +32,10 @@ class ProductController extends Controller
             DB::beginTransaction();
            $product= Product::create($requestData);
            if(isset($request->category)&&is_array($request->category)){
-               $product->categories()->attach($request->category);
+               $product->categories()->sync($request->category);
            }
            if(isset($request->category)&&is_array($request->tag)){
-               $product->tags()->attach($request->tag);
+               $product->tags()->sync($request->tag);
            }
            DB::commit();
             return redirect()->route('admin.products')->with([
@@ -55,11 +55,50 @@ class ProductController extends Controller
        // return $product;
         $brands=Brand::active()->select('id')->get();
         $tags=Tag::active()->select('id')->get();
+      // return $product->tags->pluck('id');
         return view('dashboard.products.product_update',compact('product','brands','tags'));
 
     }
     public  function update($id, ProductRequest $request){
-        return $request->all();
+       // return $request->all();
+        try{
+            $product=Product::find($id);
+            if(!$product){
+                return redirect()->route('admin.products')->with(['error'=>'هذا المنتج غير موجود']);
+            }else{
+                try{
+                    $requestData=$request->except(['_token','_method','tag','category']);
+                    $requestData["is_active"]=$request->has("is_active")?1:0;
+                    $requestData["manage_stock"]=$request->has("manage_stock")?1:0;
+                    $requestData["in_stock"]=$request->has("in_stock")?1:0;
+                    DB::beginTransaction();
+                    $product->update($requestData);
+                    if(isset($request->category)&&is_array($request->category)){
+                        $product->categories()->sync($request->category);
+                    }
+                    if(isset($request->category)&&is_array($request->tag)){
+                     //   $product->tags()->delete();
+                        $product->tags()->sync($request->tag);
+                    }
+                    DB::commit();
+                    return redirect()->route('admin.products')->with([
+                        'success'=>'تم تعديل  المنتج بنجاح'
+                    ]);
+                }
+                catch (\Exception $exception){
+                    DB::rollBack();
+                    return redirect()->route('admin.products')->with([
+                        'error'=>'هناك خطأ ما يرجى المحاولة مرة أخرى'
+                    ]);
+                }
+            }
+        }
+        catch (\Exception $exception){
+            DB::rollBack();
+            return redirect()->route('admin.brands')->with([
+                'error'=>'هناك خطأ ما يرجى المحاولة مرة أخرى'
+            ]);
+        }
     }
 
 

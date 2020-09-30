@@ -31,7 +31,15 @@ class ProductRequest extends FormRequest
             'brand_id'=>'sometimes|nullable|numeric|exists:brands,id',
             'category'=>'required|array|min:1',
             'category.*'=>'numeric|exists:categories,id',
-            'tag'=>'sometimes|nullable|array'
+            'tag'=>'sometimes|nullable|array',
+            'price'=>'numeric|required',
+            'special_price'=>'sometimes|nullable|numeric',
+            'special_price_type'=>'sometimes|nullable',
+            'special_price_start'=>'sometimes|nullable|date|after_or_equal:today',
+            'special_price_end'=>'sometimes|nullable|date|after_or_equal:special_price_start',
+            'selling_price'=>'numeric|required',
+            'sku'=>'required',
+            'qty'=>'numeric|required'
         ];
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
         {
