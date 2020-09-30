@@ -76,11 +76,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="tag">  اختار العلامات الدلالية</label>
+
                     <select name="tag[]" multiple  class="select2  form-control">
                         <optgroup label="من فضلك أختر العلامات ">
                             @if(isset($tags) && $tags -> count() > 0)
                                 @foreach($tags as $tag)
                                     <option
+                                        {{
+                                         in_array($tag->id,$product->tags->pluck('id')->toArray()) ?'selected':'' }}
                                         value="{{$tag -> id }}">{{$tag -> name}}</option>
                                 @endforeach
                             @endif
