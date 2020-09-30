@@ -61,6 +61,8 @@
     <!-- END Custom CSS-->
 
     <link rel="stylesheet" href="{{asset('assets/admin/jstree/themes/default/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/bootstrap-datepicker.css')}}">
+
 
     @notify_css
     @yield('style')
@@ -111,6 +113,8 @@
 <script src="{{ asset('assets/admin/jstree/jstree.js') }}"></script>
 <script src="{{ asset('assets/admin/jstree/jstree.wholerow.js') }}"></script>
 <script src="{{ asset('assets/admin/jstree/jstree.checkbox.js') }}"></script>
+<script src="{{ asset('assets/admin/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/bootstrap-datepicker.ar.min.js') }}"></script>
 <!-- BEGIN VENDOR JS-->
 <script src="{{asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"
         type="text/javascript"></script>
