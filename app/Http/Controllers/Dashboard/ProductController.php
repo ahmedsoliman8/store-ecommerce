@@ -6,9 +6,11 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductStoreRequest;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -23,7 +25,7 @@ class ProductController extends Controller
         return view('dashboard.products.product_create',compact('brands','tags'));
     }
     public  function store( ProductStoreRequest $request){
-       // return $request->all();
+
        try{
             $requestData=$request->except(['_token','_method','tag','category']);
             $requestData["is_active"]=$request->has("is_active")?1:0;
@@ -52,12 +54,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product=Product::find($id);
-       // return $product;
         $brands=Brand::active()->select('id')->get();
         $tags=Tag::active()->select('id')->get();
-      // return $product->tags->pluck('id');
         return view('dashboard.products.product_update',compact('product','brands','tags'));
-
     }
     public  function update($id, ProductRequest $request){
        // return $request->all();
@@ -74,11 +73,12 @@ class ProductController extends Controller
                     DB::beginTransaction();
                     $product->update($requestData);
                     if(isset($request->category)&&is_array($request->category)){
-                        $product->categories()->sync($request->category);
-                    }
+                        $product->categories()->sync($request->category);                    }
                     if(isset($request->category)&&is_array($request->tag)){
-                     //   $product->tags()->delete();
                         $product->tags()->sync($request->tag);
+                    }elseif (isset( $product->tags)){
+
+                        $product->tags()->detach($product->tags);
                     }
                     DB::commit();
                     return redirect()->route('admin.products')->with([
@@ -125,5 +125,48 @@ class ProductController extends Controller
                 'error'=>'هناك خطأ ما يرجى المحاولة مرة أخرى'
             ]);
         }
+    }
+
+
+    public function upload_image($pid){
+        if(request()->hasFile('file')){
+        //    return \request('file');
+            $file_path=uploadImage("products",\request('file'));
+          //  return $file_path;
+            $add=ProductImage::create([
+                'product_id'=>$pid,
+                'photo'=>'assets/'.$file_path
+            ]);
+            return response(['status'=>true,'id'=>$add->id],200);
+        }
+    }
+    public function delete_image(){
+        if(request()->has('id')){
+            $product=ProductImage::findOrfail(request('id'));
+            if(File::exists($product->photo)) {
+                File::delete($product->photo);
+            }
+            $product->delete();
+        }
+    }
+
+    public  function addImages($id){
+        try{
+            $product=Product::find($id);
+           //return $product->images()->get();
+          //  return $product;
+            if(!$product){
+                return redirect()->route('admin.products')->with(['error'=>'هذا المنتج غير موجود']);
+            }else{
+                return view('dashboard.products.add_images',compact('product'));
+            }
+        }
+        catch (\Exception $exception){
+            DB::rollBack();
+            return redirect()->route('admin.products')->with([
+                'error'=>'هناك خطأ ما يرجى المحاولة مرة أخرى'
+            ]);
+        }
+
     }
 }

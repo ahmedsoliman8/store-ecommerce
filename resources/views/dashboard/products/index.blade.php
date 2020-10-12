@@ -55,6 +55,7 @@
                                                 <th> الاسم</th>
                                                 <th>السعر</th>
                                                 <th>الحالة</th>
+                                                <th>الصور</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
@@ -67,6 +68,12 @@
                                                         <td>{{$product->name}} </td>
                                                         <td> {{$product->price}} </td>
                                                         <td>{{$product->getActive()}}</td>
+                                                        <td>
+                                                            <a href="{{route('admin.products.add.images',$product->id)}}"
+                                                               class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">
+                                                               صور المنتج
+                                                            </a>
+                                                        </td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
