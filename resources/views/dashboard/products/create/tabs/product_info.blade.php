@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label for="description_{{$localeCode}}">{{__("_dasboard.".$localeCode.'.description')}} </label>
                             <textarea  id="description_{{$localeCode}}"
-                                   class="form-control"
+                                   class="form-control ckeditor"
                                    name="{{$localeCode}}[description]">
                                 {{ old($localeCode . '.description') }}
                             </textarea>
@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label for="short_description_{{$localeCode}}">{{__("_dasboard.".$localeCode.'.short_description')}} </label>
                             <textarea   id="short_description_{{$localeCode}}"
-                                       class="form-control"
+                                       class="form-control ckeditor"
                                        name="{{$localeCode}}[short_description]">
                                  {{ old($localeCode . '.short_description') }}
                             </textarea>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
-
 @push('script')
     <script type="text/javascript">
+
         $('.datepicker').datepicker({
             rtl:'{{LaravelLocalization::setLocale()=='ar'?true:false}}',
             language:'{{LaravelLocalization::setLocale()}}',
@@ -12,6 +12,13 @@
         });
 
     </script>
+    @if(LaravelLocalization::setLocale()=='ar')
+        <style>
+            .datepicker {
+                direction: rtl;
+            }
+        </style>
+    @endif
 @endpush
 
 @section('content')

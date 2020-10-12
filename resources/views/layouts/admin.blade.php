@@ -65,7 +65,7 @@
 
 
     @notify_css
-    @yield('style')
+    @stack('style')
     <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
 
     <style>
@@ -157,11 +157,14 @@
 <script src="{{asset('assets/admin/js/scripts/forms/checkbox-radio.js')}}" type="text/javascript"></script>
 
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
+{{--ckeditor standard--}}
+<script src="{{ asset('assets/admin/js/plugins/ckeditor/ckeditor.js') }}"></script>
 
 
 
 
 <script>
+    CKEDITOR.config.language =  "{{ LaravelLocalization::setLocale() }}";
     $('#meridians1').timeDropper({
         meridians: true,
         setCurrentTime: false

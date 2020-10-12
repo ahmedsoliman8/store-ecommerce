@@ -43,9 +43,13 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="special_price_type"> نوع السعر المخصص</label>
-                    <input type="text" value="{{$product->special_price_type}}" id="special_price_type"
-                           class="form-control"
-                           name="special_price_type">
+                    <select name="special_price_type"  class="form-control">
+                        <optgroup label="من فضلك أختر النوع ">
+                            <option value="">أختر النوع </option>
+                            <option {{$product->special_price_type === 'fixed'?'selected':''}} value="fixed">fixed</option>
+                            <option {{$product->special_price_type === 'percent'?'selected':''}} value="percent">percent</option>
+                        </optgroup>
+                    </select>
                     @error("special_price_type")
                     <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -117,7 +121,7 @@
                            @if($product->manage_stock) checked @endif
                     />
                     <label for="switcheryColor4"
-                           class="card-title ml-1">manage_stock </label>
+                           class="card-title ml-1">ادارة المخزن </label>
                     @error("manage_stock")
                     <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -132,7 +136,7 @@
                            @if($product->in_stock) checked @endif
                     />
                     <label for="switcheryColor4"
-                           class="card-title ml-1">in_stock </label>
+                           class="card-title ml-1">متوفر </label>
                     @error("in_stock")
                     <span class="text-danger">{{$message}}</span>
                     @enderror

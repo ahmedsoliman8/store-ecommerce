@@ -68,6 +68,10 @@ class Product extends Model
         return $query->where("is_active",1);
     }
 
+    public  function images(){
+        return $this->hasMany('App\Models\ProductImage','product_id','id');
+    }
+
 
 }
 

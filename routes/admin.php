@@ -73,6 +73,9 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
         Route::post('update/{id}','ProductController@update')->name('admin.products.update');
         Route::get('delete/{id}','ProductController@destroy')->name('admin.products.delete');
         Route::get('changeStatus/{id}','ProductController@changeStatus')->name('admin.products.status');
+        Route::get('addImages/{id}','ProductController@addImages')->name('admin.products.add.images');
+        Route::post('upload/image/{pid}','ProductController@upload_image')->name('admin.upload.image');
+        Route::post('delete/image','ProductController@delete_image')->name('admin.delete.image');
     });
 
     //Sub Categories

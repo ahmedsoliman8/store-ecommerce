@@ -12,7 +12,7 @@
                     }
                 },
                 "checkbox" : {
-                    "keep_selected_style" : false
+                    "three_state" : false
                 },
                 "plugins" : [ "checkbox" ]
             });
