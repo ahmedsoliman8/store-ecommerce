@@ -78,6 +78,19 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
         Route::post('delete/image','ProductController@delete_image')->name('admin.delete.image');
     });
 
+    //Attributes
+    Route::group(['prefix'=>'attributes'],function (){
+        Route::get('/','AttributeController@index')->name('admin.attributes');
+        Route::get('create','AttributeController@create')->name('admin.attributes.create');
+        Route::post('store','AttributeController@store')->name('admin.attributes.store');
+        Route::get('edit/{id}','AttributeController@edit')->name('admin.attributes.edit');
+        Route::post('update/{id}','AttributeController@update')->name('admin.attributes.update');
+        Route::get('delete/{id}','AttributeController@destroy')->name('admin.attributes.delete');
+
+    });
+
+
+
     //Sub Categories
     /*
     Route::group(['prefix'=>'sub_categories'],function (){
