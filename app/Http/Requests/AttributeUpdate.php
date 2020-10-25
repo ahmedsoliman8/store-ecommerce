@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Attribute;
 use App\Models\Brand;
+use App\Rules\UniqueAttributeName;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -33,7 +34,7 @@ class AttributeUpdate extends FormRequest
         $attribute=Attribute::find($this->id);
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
         {
-            $rules += [$localeCode . '.name' => 'required',Rule::unique('attribute_translations', 'name')->ignore($attribute->id, 'attribute_id')];
+            $rules += [$localeCode . '.name' =>[ 'required',new UniqueAttributeName($attribute->id,$localeCode . '.name')]];
         }
 
         return $rules;
