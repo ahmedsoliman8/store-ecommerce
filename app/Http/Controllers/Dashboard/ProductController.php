@@ -233,4 +233,26 @@ class ProductController extends Controller
     }
 
 
+    public  function edit_characteristic($id){
+        if(\request()->ajax()){
+            try{
+                $option=Option::find($id);
+                $attributes=Attribute::all();
+                if(!$option){
+                    return response(['status'=>false,'result'=>'هذه الخاصية غير موجوده']);
+                }else{
+                    $html=view('dashboard.products.edit_characteristic',['option'=>$option,'attributes'=>$attributes])->render();
+                    return response(['status'=>true,'result'=>$html]);
+                }
+            }
+            catch (\Exception $exception){
+                return response(['status'=>false,'result'=>'هناك خطأ ما يرجى المحاولة مرة أخرى']);
+            }
+
+        }
+
+    }
+
+
+
 }
