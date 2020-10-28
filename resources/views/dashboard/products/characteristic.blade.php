@@ -4,28 +4,18 @@
         $(document).ready(function () {
             $(document).on('click','.remove_characteristic',function (e) {
                 e.preventDefault();
-                var option_id=$(this).data('option_id');
-                var link="{{url("/")}}";
-                var url=link+'/admin/products/remove_characteristic/'+option_id;
-                console.log(url);
-                console.log(option_id);
+                var  url=$(this).attr("href");
                 $.ajax({
                     url:url,
                     type:'GET',
                     dataType:'json',
                     beforeSend:function () {
-
                     },
                     success: function (data) {
                         if(data.status ==true){
                             $('#characteristic_'+data.id).remove();
-
                         }else{
-                            var error_list='';
-                            $.each(data_error.responseJSON.errors,function (index,v) {
-                                error_list += '<li>'+v+'</li>';
-                            });
-                            $('.alert_error ul').append(error_list);
+                           alert(data.result);
                         }
                     },
                     error:function (data_error,exception) {
@@ -53,20 +43,19 @@
                         headers: {
                             'X-CSRF-TOKEN': token
                         },
-
                         beforeSend:function () {
                             $('.alert_error ul').empty();
                         },
                         success: function (data) {
                             if(data.status ==true){
                                 $('.div_characteristics').append(data.result);
-                                //$('#exampleModal').modal('close');
+
                             }else{
-                                var error_list='';
-                                $.each(data_error.responseJSON.errors,function (index,v) {
-                                    error_list += '<li>'+v+'</li>';
-                                });
-                                $('.alert_error ul').append(error_list);
+                                  var error_list='';
+                            //    $.each(data_error.responseJSON.errors,function (index,v) {
+                                    error_list += '<li>'+data.result+'</li>';
+                             //   });
+                                 $('.alert_error ul').append(error_list);
                             }
                         },
                         error:function (data_error,exception) {
@@ -106,7 +95,7 @@
                                                     <div class="col-md-12">
                                                         <label>{{$option->attribute->name}}</label>
                                                         <label> {{$option->name}} </label> <label>
-                                                            <button data-option_id="{{$option->id}}"   class="remove_characteristic btn btn-danger"><i class="fa fa-trash"></i> </button></label>
+                                                            <a data-option_id="{{$option->id}}" href="{{route("admin.products.remove.characteristic",$option->id)}}"    class="remove_characteristic btn btn-danger"><i class="fa fa-trash"></i> </a></label>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <br/>
