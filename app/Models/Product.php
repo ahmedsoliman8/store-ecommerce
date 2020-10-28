@@ -73,6 +73,11 @@ class Product extends Model
     }
 
 
+    public  function options(){
+        return $this->hasMany('App\Models\Option','product_id','id');
+    }
+
+
 }
 
 

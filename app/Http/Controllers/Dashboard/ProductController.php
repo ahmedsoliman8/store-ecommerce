@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CharacteristicStore;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductStoreRequest;
+use App\Models\Attribute;
 use App\Models\Brand;
+use App\Models\Option;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Tag;
@@ -167,4 +170,67 @@ class ProductController extends Controller
         }
 
     }
+
+
+    public  function characteristic($id){
+        try{
+            $product=Product::find($id);
+            //return $product->images()->get();
+            //  return $product;
+            $attributes=Attribute::all();
+            if(!$product){
+                return redirect()->route('admin.products')->with(['error'=>'هذا المنتج غير موجود']);
+            }else{
+                return view('dashboard.products.characteristic',compact('product','attributes'));
+            }
+        }
+        catch (\Exception $exception){
+            DB::rollBack();
+            return redirect()->route('admin.products')->with([
+                'error'=>'هناك خطأ ما يرجى المحاولة مرة أخرى'
+            ]);
+        }
+
+    }
+
+    public function add_characteristic(CharacteristicStore $request){
+        if(\request()->ajax()){
+            try{
+               // dd($request->all());
+                $requestData=$request->except(['_token','_method']);
+              // dd($requestData);
+                DB::beginTransaction();
+                $option= Option::create($requestData);
+                $html=view('dashboard.products.show_characteristic',['option'=>$option])->render();
+               DB::commit();
+                return response(['status'=>true,'result'=>$html]);
+           }
+            catch (\Exception $exception){
+               DB::rollBack();
+                return response(['status'=>false,'result'=>'هناك خطأ ما يرجى المحاولة مرة أخرى']);
+           }
+        }
+    }
+
+    public  function remove_characteristic($id){
+        if(\request()->ajax()){
+            try{
+                $option=Option::find($id);
+                if(!$option){
+                    return response(['status'=>false,'result'=>'هذه الخاصية غير موجوده']);
+                }else{
+                    $option->deleteTranslations();
+                    $option->delete();
+                    return response(['status'=>true,'id'=>$id]);
+                }
+            }
+            catch (\Exception $exception){
+                return response(['status'=>false,'result'=>'هناك خطأ ما يرجى المحاولة مرة أخرى']);
+            }
+
+        }
+
+    }
+
+
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
-class Attribute extends Model
+class Option extends Model
 {
 
     use Translatable;
@@ -18,21 +18,23 @@ class Attribute extends Model
      */
     protected $hidden=["translations"];
 
+    /**
+     * @var array
+     */
     public $translatedAttributes=['name'];
 
     /**
      * @var array
      */
-    protected $guarded=[];
+    protected $fillable=["attribute_id","product_id"];
 
-
-    public  function options(){
-        return $this->hasMany('App\Models\Option','attribute_id','id');
+    public  function product(){
+        return $this->belongsTo(Product::class)->withDefault();
     }
 
-
-
-
+    public  function attribute(){
+        return $this->belongsTo(Attribute::class)->withDefault();
+    }
 
 
 }
