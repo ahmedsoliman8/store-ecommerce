@@ -79,6 +79,9 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
         Route::get('characteristic/{id}','ProductController@characteristic')->name('admin.products.characteristic');
         Route::post('add_characteristic','ProductController@add_characteristic')->name('admin.products.add.characteristic');
         Route::get('remove_characteristic/{id}','ProductController@remove_characteristic')->name('admin.products.remove.characteristic');
+        Route::get('edit_characteristic/{id}','ProductController@edit_characteristic')->name('admin.products.edit.characteristic');
+        Route::post('update_characteristic/{id}','ProductController@update_characteristic')->name('admin.products.update.characteristic');
+
 
 
 
