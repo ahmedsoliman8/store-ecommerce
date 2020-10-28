@@ -56,6 +56,7 @@
                                                 <th>السعر</th>
                                                 <th>الحالة</th>
                                                 <th>الصور</th>
+                                                <th>خصائص المنتج</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
@@ -72,6 +73,12 @@
                                                             <a href="{{route('admin.products.add.images',$product->id)}}"
                                                                class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">
                                                                صور المنتج
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{route('admin.products.characteristic',$product->id)}}"
+                                                               class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                خصائص المنتج
                                                             </a>
                                                         </td>
                                                         <td>

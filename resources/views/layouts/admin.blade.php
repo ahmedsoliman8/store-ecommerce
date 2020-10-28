@@ -51,6 +51,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/extensions/datedropper.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/extensions/timedropper.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/bower_components/font-awesome/css/font-awesome.min.css')}}">
+
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     @if(getFolder()==='css-rtl')

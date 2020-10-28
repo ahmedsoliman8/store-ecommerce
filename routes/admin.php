@@ -76,6 +76,12 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
         Route::get('addImages/{id}','ProductController@addImages')->name('admin.products.add.images');
         Route::post('upload/image/{pid}','ProductController@upload_image')->name('admin.upload.image');
         Route::post('delete/image','ProductController@delete_image')->name('admin.delete.image');
+        Route::get('characteristic/{id}','ProductController@characteristic')->name('admin.products.characteristic');
+        Route::post('add_characteristic','ProductController@add_characteristic')->name('admin.products.add.characteristic');
+        Route::get('remove_characteristic/{id}','ProductController@remove_characteristic')->name('admin.products.remove.characteristic');
+
+
+
     });
 
     //Attributes
