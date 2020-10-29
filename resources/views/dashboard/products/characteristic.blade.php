@@ -32,7 +32,6 @@
                 });
                 return false;
             });
-
             $(document).on('click','.remove_characteristic',function (e) {
                 e.preventDefault();
                 var  url=$(this).attr("href");
@@ -56,7 +55,6 @@
                 });
               return false;
             });
-
             $(document).on('click','.add_characteristic',function (e) {
                     e.preventDefault();
                     var form=$('.characteristicSubmit')[0];
@@ -102,7 +100,6 @@
                     });
                     return false;
                 });
-
             $(document).on('click','.update_characteristic',function (e) {
                 e.preventDefault();
                 var form=$('.characteristicUpdate')[0];
@@ -149,7 +146,6 @@
                 });
                 return false;
             });
-
         });
 
     </script>
@@ -167,6 +163,35 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         <center><h3>خصائص المنتج</h3></center>
+                                        <table
+                                            class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                            <thead>
+                                            <tr>
+
+                                                <th> الخاصية </th>
+                                                <th>الاسم</th>
+                                                <th>الإجراءات</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="div_characteristics">
+                                            @isset($product->options )
+
+                                                @foreach($product->options as $option)
+                                                    <tr id="characteristic_{{$option->id}}">
+
+                                                        <td>{{$option->attribute->name}} </td>
+                                                        <td> {{$option->name}} </td>
+                                                        <td>
+                                                           <a  href="{{route("admin.products.edit.characteristic",$option->id)}}"    class="edit_characteristic btn btn-warning"><i class="fa fa-edit"></i> </a>
+                                                           <a  href="{{route("admin.products.remove.characteristic",$option->id)}}"    class="remove_characteristic btn btn-danger"><i class="fa fa-trash"></i> </a>
+                                                        </td>
+                                                    </tr>
+
+                                                @endforeach
+                                            @endisset
+                                            </tbody>
+                                        </table>
+                                        {{--
                                         <div  class="div_characteristics col-lg-12 col-md-12 col-sm-12">
                                             @foreach($product->options as $option)
                                                 <div class="row characteristic" id="characteristic_{{$option->id}}">
@@ -185,7 +210,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <br/>
-
+                                --}}
                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                                             <i class="fa fa-plus-circle"></i>
                                         </button>
