@@ -1,10 +1,16 @@
-<form class="form" action="{{route('admin.products.update.characteristic',$option->id)}}"
+<form class="form characteristicUpdate" action="{{route('admin.products.update.characteristic',$option->id)}}"
       method="POST"
       >
     @csrf
     @method('POST')
     <input type="hidden" name="id" value="{{$option->id}}"/>
     <input type="hidden" name="product_id" value="{{$option->product_id}}"/>
+    <div class="alert_error_edit">
+        <center><h1></h1></center>
+        <ul>
+
+        </ul>
+    </div>
 
     <div class="form-body">
         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
