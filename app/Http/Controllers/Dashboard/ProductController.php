@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CharacteristicStore;
+use App\Http\Requests\CharacteristicUpdate;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductStoreRequest;
 use App\Models\Attribute;
@@ -211,6 +212,32 @@ class ProductController extends Controller
            }
         }
     }
+
+    public function update_characteristic(CharacteristicUpdate $request,$id){
+        if(\request()->ajax()){
+           try{
+                $option=Option::find($id);
+                if(!$option){
+                    return response(['status'=>false,'result'=>'هذه الخاصية غير موجوده']);
+                }else{
+                    $requestData=$request->except(['_token','_method']);
+                    DB::beginTransaction();
+                    $option->update($requestData);
+                    $html=view('dashboard.products.show_update_characteristic',['option'=>$option])->render();
+                    DB::commit();
+                    return response(['status'=>true,'result'=>$html,'id'=>$id]);
+              }
+
+
+            }
+            catch (\Exception $exception){
+                DB::rollBack();
+               return response(['status'=>false,'result'=>'هناك خطأ ما يرجى المحاولة مرة أخرى']);
+          }
+        }
+    }
+
+
 
     public  function remove_characteristic($id){
         if(\request()->ajax()){

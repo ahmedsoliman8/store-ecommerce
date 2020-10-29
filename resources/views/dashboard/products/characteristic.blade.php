@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @push('script')
        <script type="text/javascript">
         $(document).ready(function () {
@@ -31,7 +32,6 @@
                 });
                 return false;
             });
-
 
             $(document).on('click','.remove_characteristic',function (e) {
                 e.preventDefault();
@@ -102,6 +102,53 @@
                     });
                     return false;
                 });
+
+            $(document).on('click','.update_characteristic',function (e) {
+                e.preventDefault();
+                var form=$('.characteristicUpdate')[0];
+                var token = "{{csrf_token()}}";
+                var fdata= new FormData(form);
+                fdata['_token'] = token;
+                var url=$('.characteristicUpdate').attr('action');
+                $.ajax({
+                    url:url,
+                    type:'post',
+                    dataType:'json',
+                    data:fdata,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': token
+                    },
+                    beforeSend:function () {
+                        $('.alert_error_edit ul').empty();
+                    },
+                    success: function (data) {
+                        if(data.status ==true){
+                            $('#characteristic_'+data.id).empty();
+                            $('#characteristic_'+data.id).append(data.result);
+
+                        }else{
+                            var error_list='';
+                            //    $.each(data_error.responseJSON.errors,function (index,v) {
+                            error_list += '<li>'+data.result+'</li>';
+                            //   });
+                            $('.alert_error_edit ul').append(error_list);
+                        }
+                    },
+                    error:function (data_error,exception) {
+                        if(exception == 'error'){
+                            var error_list='';
+                            $.each(data_error.responseJSON.errors,function (index,v) {
+                                error_list += '<li>'+v+'</li>';
+                            });
+                            $('.alert_error_edit ul').append(error_list);
+                        }
+                    }
+
+                });
+                return false;
+            });
 
         });
 
