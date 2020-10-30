@@ -26,7 +26,8 @@ class CharacteristicStore extends FormRequest
     {
         $rules=[
             'attribute_id'=>'required|numeric|exists:attributes,id',
-            'product_id'=>'required|exists:products,id'
+            'product_id'=>'required|exists:products,id',
+            'price'=>'sometimes|nullable|numeric'
         ];
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
         {

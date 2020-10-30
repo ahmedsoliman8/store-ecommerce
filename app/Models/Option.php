@@ -26,7 +26,7 @@ class Option extends Model
     /**
      * @var array
      */
-    protected $fillable=["attribute_id","product_id"];
+    protected $fillable=["attribute_id","product_id","price"];
 
     public  function product(){
         return $this->belongsTo(Product::class)->withDefault();

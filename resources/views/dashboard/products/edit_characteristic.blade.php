@@ -53,6 +53,22 @@
             </div>
 
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="price">السعر</label>
+                        <input type="text" value="{{$option->price}}" id="price"
+                               class="form-control"
+                               name="price">
+                        @error("price")
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                </div>
+
+            </div>
+
+
     </div>
 
 
