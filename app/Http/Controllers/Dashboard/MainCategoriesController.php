@@ -17,10 +17,9 @@ class MainCategoriesController extends Controller
         return view('dashboard.categories.create');
     }
     public  function store(MainCategoryStore $request){
-       // return $request->all();
+
         try{
             $requestData=$request->except(['_token','_method']);
-            //dd( $requestData);
             $requestData["is_active"]=$request->has("is_active")?1:0;
             DB::beginTransaction();
             Category::create($requestData);
@@ -38,20 +37,20 @@ class MainCategoriesController extends Controller
     }
 
     public  function edit($id){
-        //delete_parent($id);
+
         $category=Category::find($id);
-       // return $category;
+
        $category->makeVisible(['translations']);
         if(!$category){
             return redirect()->route('admin.maincategories',$category->id)->with([
                 'error'=>'هذا القسم غير موجود'
             ]);
         }
-       //return $category;
+
         return view('dashboard.categories.edit',compact('category'));
     }
     public  function update($id, MainCategoryUpdate $request){
-    // return $request->all();
+
         try{
             $category=Category::find($id);
             if(!$category){
@@ -61,8 +60,6 @@ class MainCategoriesController extends Controller
                 $requestData["is_active"]=$request->has("is_active")?1:0;
                 DB::beginTransaction();
                 $category->update($requestData);
-              //  $category->name=$request->name;
-              //  $category->save();
                 DB::commit();
                 return redirect()->route('admin.maincategories')->with([
                     'success'=>'تم تحديث  القسم بنجاح'

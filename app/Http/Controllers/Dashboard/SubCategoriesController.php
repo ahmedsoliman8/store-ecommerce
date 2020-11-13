@@ -47,7 +47,7 @@ class SubCategoriesController extends Controller
                 'error'=>'هذا القسم غير موجود'
             ]);
         }
-       //return $category;
+
         return view('dashboard.subcategories.edit',compact('category','categories'));
     }
     public  function update($id, SubCategoryUpdate $request){
@@ -59,11 +59,10 @@ class SubCategoriesController extends Controller
             }else{
                 $requestData=$request->except(['_token','_method']);
                 $requestData["is_active"]=$request->has("is_active")?1:0;
-                //return $requestData;
+
                 DB::beginTransaction();
                 $category->update($requestData);
-              //  $category->name=$request->name;
-              //  $category->save();
+
                 DB::commit();
                 return redirect()->route('admin.subcategories')->with([
                     'success'=>'تم تحديث  القسم بنجاح'

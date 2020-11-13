@@ -13,3 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+    Route::group(['namespace'=>'Site','middleware'=>'auth'],function (){
+
+    });
+    Route::get('/','Site\SiteController@index')->name('site.index');
+    Auth::routes();
+
+});

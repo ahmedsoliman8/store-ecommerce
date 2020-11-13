@@ -18,10 +18,10 @@ class TagController extends Controller
         return view('dashboard.tags.create');
     }
     public  function store(TagStore $request){
-        // return $request->all();
+
         try{
             $requestData=$request->except(['_token','_method']);
-            //dd( $requestData);
+
             $requestData["is_active"]=$request->has("is_active")?1:0;
             DB::beginTransaction();
             Tag::create($requestData);
@@ -39,20 +39,20 @@ class TagController extends Controller
     }
 
     public  function edit($id){
-        //delete_parent($id);
+
         $tag=Tag::find($id);
-        // return $tag;
+
         $tag->makeVisible(['translations']);
         if(!$tag){
             return redirect()->route('admin.tags',$tag->id)->with([
                 'error'=>'هذا العلامة غير موجود'
             ]);
         }
-        //return $tag;
+
         return view('dashboard.tags.edit',compact('tag'));
     }
     public  function update($id, TagUpdate $request){
-        // return $request->all();
+
         try{
             $tag=Tag::find($id);
             if(!$tag){
