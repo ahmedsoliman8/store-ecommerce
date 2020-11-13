@@ -14,7 +14,7 @@ class SettingsController extends Controller
     {
         if ($type === 'free') {
             $shipping = Setting::where('key', 'free_shipping_label')->first();
-          //  return $shipping;
+
         } elseif ($type === 'local') {
             $shipping = Setting::where('key', 'local_shipping_label')->first();
         } elseif ($type === 'outer') {

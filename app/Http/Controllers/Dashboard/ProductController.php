@@ -132,9 +132,9 @@ class ProductController extends Controller
 
     public function upload_image($pid){
         if(request()->hasFile('file')){
-        //    return \request('file');
+
             $file_path=uploadImage("products",\request('file'));
-          //  return $file_path;
+
             $add=ProductImage::create([
                 'product_id'=>$pid,
                 'photo'=>'assets/'.$file_path
@@ -155,8 +155,6 @@ class ProductController extends Controller
     public  function addImages($id){
         try{
             $product=Product::find($id);
-           //return $product->images()->get();
-          //  return $product;
             if(!$product){
                 return redirect()->route('admin.products')->with(['error'=>'هذا المنتج غير موجود']);
             }else{
@@ -176,8 +174,6 @@ class ProductController extends Controller
     public  function characteristic($id){
         try{
             $product=Product::find($id);
-            //return $product->images()->get();
-            //  return $product;
             $attributes=Attribute::all();
             if(!$product){
                 return redirect()->route('admin.products')->with(['error'=>'هذا المنتج غير موجود']);
