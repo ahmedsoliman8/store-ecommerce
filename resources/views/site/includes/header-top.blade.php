@@ -24,7 +24,7 @@
                                 @csrf
                             </form>
                         @else
-                            <a class="register" href="http://demo.bestprestashoptheme.com/savemart/ar/تسجيل الدخول?create_account=1" data-link-action="display-register-form">
+                            <a class="register" href="{{route("register")}}" data-link-action="display-register-form">
                                 Register
                             </a>
                             <span class="or-text">or</span>
