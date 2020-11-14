@@ -113,9 +113,9 @@
 
 
     <div id="wrapper-site">
-        <div id="content-wrapper" class="full-width">
+
             @yield('content')
-        </div>
+
     </div>
 
     @include('site.includes.footer')

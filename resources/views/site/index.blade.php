@@ -1,6 +1,7 @@
 @extends('layouts.site')
 
 @section('content')
+    <div id="content-wrapper" class="full-width">
     <div id="main">
 
         <div id="displayTop" class="displaytopthree">
@@ -6977,5 +6978,5 @@
         </section>
 
     </div>
-
+    </div>
 @endsection

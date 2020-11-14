@@ -152,12 +152,12 @@
 
                                         <div class="form-group row no-gutters">
                                             <label class="col-md-2 form-control-label mb-xs-5 required">
-                                                البريد الإلكتروني :
+                                                الموبيل :
                                             </label>
                                             <div class="col-md-6">
 
-                                                <input  id="email"   type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                                @error('email')
+                                                <input  id="mobile"   type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
+                                                @error('mobile')
                                                 <span class="invalid-feedback" role="alert">
                                                  <strong>{{ $message }}</strong>
                                                 </span>
@@ -280,11 +280,7 @@
 
 
 
-                        <footer class="page-footer">
 
-                            <!-- Footer content -->
-
-                        </footer>
 
 
                     </div>

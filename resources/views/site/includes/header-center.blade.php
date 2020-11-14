@@ -1,11 +1,13 @@
 <div class="header-center hidden-sm-down">
     <div class="container">
         <div class="row d-flex align-items-center">
+            @if(auth()->user())
             <div id="_desktop_logo" class="contentsticky_logo d-flex align-items-center justify-content-start col-lg-3 col-md-3">
                 <a href="http://demo.bestprestashoptheme.com/savemart/">
-                    <img class="logo img-fluid" src="/savemart/modules/novthemeconfig/images/logos/logo-1.png" alt="Prestashop_Savemart">
+                    <img class="logo img-fluid" src="/savemart/modules/novthemeconfig/images/logos/logo-1.png" alt="{{auth()->user()->name}}">
                 </a>
             </div>
+            @endif
             <div class="col-lg-9 col-md-9 header-menu d-flex align-items-center justify-content-end">
                 <div class="data-contact d-flex align-items-center">
                     <div class="title-icon">support<i class="icon-support icon-address"></i></div>
