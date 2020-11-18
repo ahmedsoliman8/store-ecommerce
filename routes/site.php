@@ -19,10 +19,14 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
-    Route::group(['namespace'=>'Site','middleware'=>'auth'],function (){
+    Route::group(['namespace'=>'Site','middleware'=>['auth','verifyCode']],function (){
 
+    });
+    Route::group(['namespace'=>'Site','middleware'=>'auth'],function (){
+        Route::get('/verify','VerificationCodeController@verify')->name('verify');
+        Route::post('/verify/user','VerificationCodeController@verify_user')->name('verify_user');
     });
     Route::get('/','Site\SiteController@index')->name('site.index');
     Auth::routes();
-
 });
+
