@@ -25,8 +25,9 @@ class VerificationCodeController extends Controller
     public function verify_user(VerificationCodeRequest $request){
        $check= $this->verification_services->checkOTPCODE($request->code);
        if(!$check){
-            return 'You Enter Wrong Code';
+            return redirect()->route('verify');
        }
+       $this->verification_services->removeOTPCODE($request->code);
        return redirect()->route('site.index');
     }
 

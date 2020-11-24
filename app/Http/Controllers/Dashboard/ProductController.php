@@ -162,7 +162,7 @@ class ProductController extends Controller
             }
         }
         catch (\Exception $exception){
-            DB::rollBack();
+
             return redirect()->route('admin.products')->with([
                 'error'=>'هناك خطأ ما يرجى المحاولة مرة أخرى'
             ]);
@@ -182,7 +182,7 @@ class ProductController extends Controller
             }
         }
         catch (\Exception $exception){
-            DB::rollBack();
+
             return redirect()->route('admin.products')->with([
                 'error'=>'هناك خطأ ما يرجى المحاولة مرة أخرى'
             ]);
