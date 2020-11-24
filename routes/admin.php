@@ -63,8 +63,7 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
         Route::get('changeStatus/{id}','TagController@changeStatus')->name('admin.tags.status');
     });
 
-
-    //Tags
+    //Products
     Route::group(['prefix'=>'products'],function (){
         Route::get('/','ProductController@index')->name('admin.products');
         Route::get('create','ProductController@create')->name('admin.products.create');
@@ -85,6 +84,9 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
 
 
 
+
+
+
     });
 
     //Attributes
@@ -96,6 +98,13 @@ Route::group(['namespace'=>'Dashboard','prefix'=>'admin','middleware'=>'auth:adm
         Route::post('update/{id}','AttributeController@update')->name('admin.attributes.update');
         Route::get('delete/{id}','AttributeController@destroy')->name('admin.attributes.delete');
 
+    });
+
+    //Sliders
+    Route::group(['prefix'=>'sliders'],function () {
+        Route::get('addSliders', 'SliderController@addSliders')->name('admin.add.sliders');
+        Route::post('upload/slider', 'SliderController@upload_slider')->name('admin.upload.slider');
+        Route::post('delete/slider', 'SliderController@delete_slider')->name('admin.delete.slider');
     });
 
 

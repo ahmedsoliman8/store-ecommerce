@@ -38,4 +38,8 @@ class VerificationServices
         return false;
     }
 
+    public  function removeOTPCODE($code){
+        VerificationCode::where('code',$code)->delete();
+    }
+
 }
