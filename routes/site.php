@@ -26,7 +26,8 @@ Route::group(
         Route::get('/verify','VerificationCodeController@verify')->name('verify');
         Route::post('/verify/user','VerificationCodeController@verify_user')->name('verify_user');
     });
-
+    Route::get('/categories','Site\SiteController@category')->name('site.index');
+    Route::get('category/{slug}','CategoryController@productsBySlug') ->name('category');
     Auth::routes();
 });
 

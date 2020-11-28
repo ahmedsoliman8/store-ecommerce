@@ -36,7 +36,7 @@ if(!function_exists('load_cat')){
                 ];
             }
             $list_arr['id']=$category->id;
-            $list_arr['parent']=$category->parent_id !== null ?$category->parent_id:'#';
+            $list_arr['parent']=$category->category_id !== null ?$category->category_id:'#';
             $list_arr['text']=$category->name;
             array_push($cat_arr,$list_arr);
         }
@@ -50,9 +50,9 @@ if(!function_exists('load_cat')){
         function get_parent($cat_id){
             // $list_department=[];
             $cat=\App\Models\Category::find($cat_id);
-            if($cat->parent_id !== null&&$cat->parent_id>0){
+            if($cat->category_id !== null&&$cat->category_id>0){
                 //   array_push($list_department,$department->parent);
-                return get_parent($cat->parent_id).','.$cat_id;
+                return get_parent($cat->category_id).','.$cat_id;
             }else{
                 return $cat_id;
             }
@@ -110,7 +110,7 @@ if(!function_exists('load_cat_product')){
                 ];
             }
             $list_arr['id']=$category->id;
-            $list_arr['parent']=$category->parent_id !== null ?$category->parent_id:'#';
+            $list_arr['parent']=$category->category_id !== null ?$category->category_id:'#';
             $list_arr['text']=$category->name;
             array_push($cat_arr,$list_arr);
         }
@@ -124,9 +124,9 @@ if(!function_exists('load_cat_product')){
         function get_parent($cat_id){
             // $list_department=[];
             $cat=\App\Models\Category::find($cat_id);
-            if($cat->parent_id !== null&&$cat->parent_id>0){
+            if($cat->parent_id !== null&&$cat->category_id>0){
                 //   array_push($list_department,$department->parent);
-                return get_parent($cat->parent_id).','.$cat_id;
+                return get_parent($cat->category_id).','.$cat_id;
             }else{
                 return $cat_id;
             }

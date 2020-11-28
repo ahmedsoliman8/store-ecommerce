@@ -29,7 +29,7 @@ class MainCategoryUpdate extends FormRequest
 
         $rules=[
             'slug'=>'required|unique:categories,slug,'.$this->id,
-            'parent_id'=>'sometimes|nullable|numeric'
+            'category_id'=>'sometimes|nullable|numeric'
         ];
         $category=Category::find($this->id);
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)

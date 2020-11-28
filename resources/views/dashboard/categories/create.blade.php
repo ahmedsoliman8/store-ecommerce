@@ -6,7 +6,7 @@
 
                 $('#jstree').jstree({
                     "core" : {
-                        'data' : {!! load_cat(old('parent_id')) !!},
+                        'data' : {!! load_cat(old('category_id')) !!},
                         "themes" : {
                             "variant" : "large"
                         }
@@ -22,7 +22,7 @@
                     for (i=0,j=data.selected.length;i<j;i++){
                         r.push(data.instance.get_node(data.selected[i]).id);
                     }
-                    $('.parent_id').val(r.join(', '));
+                    $('.category_id').val(r.join(', '));
                 });
             });
 </script>
@@ -93,7 +93,7 @@
 
                                                 <div class="clearfix"></div>
                                                 <div id="jstree"></div>
-                                                <input type="hidden" name="parent_id" class="parent_id" value="{{old('parent_id')}}"/>
+                                                <input type="hidden" name="category_id" class="category_id" value="{{old('category_id')}}"/>
                                                 <div class="clearfix"></div>
 
 

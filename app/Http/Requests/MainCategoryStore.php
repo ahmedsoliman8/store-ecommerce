@@ -26,7 +26,7 @@ class MainCategoryStore extends FormRequest
     {
         $rules=[
             'slug'=>'required|unique:categories,slug',
-            'parent_id'=>'sometimes|nullable|numeric'
+            'category_id'=>'sometimes|nullable|numeric'
         ];
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
         {
