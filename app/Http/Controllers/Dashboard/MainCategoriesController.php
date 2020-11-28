@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class MainCategoriesController extends Controller
 {
     public function index(){
-        $categories= Category::orderBy('id','desc')->paginate(PAGINATION_COUNT);
+        $categories= Category::orderBy('id','desc')->paginate(100);
        return view('dashboard.categories.index',compact('categories'));
     }
     public function create(){
@@ -74,7 +74,7 @@ class MainCategoriesController extends Controller
         }
     }
     public static  function deleteParent($id){
-        $cat_parent=Category::where('parent_id',$id)->get();
+        $cat_parent=Category::where('category_id',$id)->get();
       //  dd($cat_parent);
         foreach ($cat_parent as $sub){
             self::deleteParent($sub->id);

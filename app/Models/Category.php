@@ -23,7 +23,7 @@ class Category extends Model
     /**
      * @var array
      */
-    protected $fillable=["parent_id","slug","is_active"];
+    protected $fillable=["category_id","slug","is_active"];
     /**
      * @var array
      */
@@ -32,24 +32,29 @@ class Category extends Model
     ];
 
     public  function scopeParent($query){
-        return $query->whereNull('parent_id');
+        return $query->whereNull('category_id');
     }
 
 
     public  function scopeChild($query){
-        return $query->whereNotNull('parent_id');
+        return $query->whereNotNull('category_id');
     }
 
     public  function getActive(){
         return $this->is_active?'مفعل':'غير مفعل';
     }
 
-    public  function parents(){
-        return $this->hasMany('App\Models\Category','id','parent_id');
+    public  function categories(){
+        return $this->hasMany(Category::class)->select(['id','category_id','slug']);
     }
 
     public  function scopeActive($query){
         return $query->where("is_active",1);
+    }
+
+    public function childrenCategories()
+    {
+        return $this->hasMany(Category::class)->with('categories')->Active()->select(['id','category_id','slug']);
     }
 
 }
